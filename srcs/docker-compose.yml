@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  nginx:
+    build: ./requirements/nginx
+    ports:
+      - "8080:443"
+    tty: true
+    networks:
+      - wordpress
+    volumes:
+      - ./requirements/tools/www:/var/www/html/
+
+  wordpress:
+    build: ./requirements/wordpress
+    env_file:
+      - .env
+    volumes:
+      - ./requirements/tools/www:/var/www/html/
+    tty: true
+    networks:
+      - wordpress
+
+  mariadb:
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - my-mariadb-data:/var/lib/mysql
+    tty: true
+    networks:
+      - wordpress
+
+networks:
+  wordpress:
+
+volumes:
+  my-mariadb-data:

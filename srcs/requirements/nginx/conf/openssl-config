@@ -1,0 +1,21 @@
+RANDFILE               = $ENV::HOME/.rnd
+
+ [ req ]
+ default_bits           = 2048
+ default_keyfile        = keyfile.pem
+ distinguished_name     = req_distinguished_name
+ attributes             = req_attributes
+ prompt                 = no
+ output_password        = mypass
+
+ [ req_distinguished_name ]
+ C                      = JP
+ ST                     = Tokyo
+ L                      = Shinakawa
+ O                      = WeijuanChen
+ OU                     = Wchen
+ CN                     = Wchen
+ emailAddress           = user@example.com
+
+ [ req_attributes ]
+ challengePassword              = A challenge password
