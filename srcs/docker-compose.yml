@@ -20,6 +20,8 @@ services:
     tty: true
     networks:
       - wordpress
+    expose:
+      - 9000
 
   mariadb:
     build: ./requirements/mariadb
@@ -30,6 +32,8 @@ services:
     tty: true
     networks:
       - wordpress
+    expose:
+      - 3306
 
 networks:
   wordpress:

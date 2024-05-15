@@ -9,7 +9,6 @@ help:
 	@echo "make up"         # コンテナを起動"
 	@echo "make down"       # コンテナを停止"
 	@echo "make ps"         # 起動中のコンテナを表示"
-	@echo "make logs"       # ログを表示"
 
 # 変数の定義
 IMAGE_NAME = Inception
