@@ -1,30 +1,86 @@
 #!/bin/bash
 
+#mysqlユーザーがなければ作成する
+if ! getent passwd | grep mysql; then
+	groupadd mysql
+	useradd -r -g mysql -s /bin/false mysql
+fi
+
 # /run/mysqldディレクトリチェック ※mysqldで起動する際に必要なディレクトリ
-if [ -d "/run/mysqld"]; then
-	echo "mysqld already present, skipping creation"
+if [ -d "/run/mysqld" ]; then
+	echo "mysqld is already present, skipping creation"
 	chown -R mysql:mysql /run/mysqld
 else
-	echo "mysqld not found, creating....."
+	echo "mysqld is not found, creating....."
 	mkdir -p /run/mysqld
 	chown -R mysql:mysql /run/mysqld
 fi
 
-# 必須の環境変数をチェック
-if [-z "$MYSQL_DATABASE"] || [-z "$MYSQL_USER"] || [-z "$MYSQL_PASSWORD"]; then
-	echo "Error: Missing required environment variables (DB_HOST, DB_NAME, DB_USER, DB_PASSWORD)."
-    exit 1
+
+#Mariadb初期化されたか確認
+if [ -d /var/lib/mysql/mysql ]; then
+	echo "MySQL directory already present, skipping creation"
+	chown -R mysql:mysql /var/lib/mysql
+else
+	echo "MySQL data directory not found creating initial DBs"
+	chown -R mysql:mysql /var/lib/mysql
+	mysql_install_db --user=mysql --ldata=/var/lib/mysql > /dev/null
+
+	tfile=`mktemp`
+	if [ ! -f "$tfile" ]; then
+		exit 1
+	fi
+
+	#必須の環境変数をチェック
+	if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
+		echo "Error: Missing required environment variables (MYSQL_ROOT_PASSWORD)."
+		exit 1
+	fi
+	#SQL script
+	#root userを作る
+	cat << EOF > $tfile
+USE mysql;
+FLUSH PRIVILEGES;
+GRANT ALL ON *.* TO '$MYSQL_ROOT_USER'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
+GRANT ALL ON *.* TO '$MYSQL_ROOT_USER'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
+SET PASSWORD FOR '$MYSQL_ROOT_USER'@'localhost'=PASSWORD('$MYSQL_ROOT_PASSWORD');
+DROP DATABASE IF EXISTS test;
+FLUSH PRIVILEGES;
+EOF
+
+	# databaseを作る
+	if [ -z "$MYSQL_DATABASE" ]; then
+		echo "Error: Missing required environment variables (MYSQL_DATABASE)."
+		exit 1
+	else
+		echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE" >> $tfile
+	fi
+	if [ ! -z "$MYSQL_CHARSET" ] && [ ! -z "$MYSQL_COLLATION" ]; then
+		echo "[i] with character set [$MYSQL_CHARSET] and collation [$MYSQL_COLLATION]"
+		echo "CHARACTER SET $MYSQL_CHARSET COLLATE $MYSQL_COLLATION;" >> $tfile
+	else
+		echo "[i] with character set: 'utf8mb4' and collation: 'utf8mb4_unicode_ci'"
+		echo "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" >> $tfile
+	fi
+
+	# userを作る
+	if [ -z "$MYSQL_USER" i] || [ -z "$MYSQL_PASSWORD" ]; then
+		echo "Error: Missing required environment variables (MYSQL_USER, MYSQL_PASSWORD)."
+		exit 1
+	else
+		echo "[i] Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
+		echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> $tfile
+		echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';" >> $tfile
+		echo "FLUSH PRIVILEGES;" >> $tfile
+	fi
+
+
+	/usr/sbin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $tfile
+	rm -f $tfile
+
+	echo "Database '$MYSQL_DATABASE' created successfully!"
 fi
 
-#Databaseを作る
-/usr/sbin/mysqld --user=user << MYSQL_SCRIPT
-CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;
-CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
-GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';
-FLUSH PRIVILEGES;
-MYSQL_SCRIPT
-
-echo "Database '$MYSQL_DATABASE' created successfully!"
-
-#CMDで渡された引数を$@で引用される（/usr/sbin/mysqld --user=mysql）
+#CMDで渡された引数を$@で引用される
+echo "$@"
 exec "$@"

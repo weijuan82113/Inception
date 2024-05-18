@@ -10,6 +10,9 @@ services:
       - wordpress
     volumes:
       - ./requirements/tools/www:/var/www/html/
+    depends_on:
+      - wordpress
+      - mariadb
 
   wordpress:
     build: ./requirements/wordpress
@@ -22,6 +25,8 @@ services:
       - wordpress
     expose:
       - 9000
+    depends_on:
+      - mariadb
 
   mariadb:
     build: ./requirements/mariadb
