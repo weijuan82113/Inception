@@ -10,9 +10,9 @@ services:
       - wordpress
     volumes:
       - ./requirements/tools/www:/var/www/html/
-    depends_on:
-      - wordpress
-      - mariadb
+    # depends_on:
+    #   wordpress:
+    #     condition: service_healthy
 
   wordpress:
     build: ./requirements/wordpress
@@ -25,15 +25,15 @@ services:
       - wordpress
     expose:
       - 9000
-    depends_on:
-      - mariadb
 
   mariadb:
     build: ./requirements/mariadb
     env_file:
       - .env
+    # volumes:
+    #   - my-mariadb-data:/var/lib/mysql
     volumes:
-      - my-mariadb-data:/var/lib/mysql
+      - ./requirements/tools/db:/var/lib/mysql/
     tty: true
     networks:
       - wordpress
@@ -43,5 +43,5 @@ services:
 networks:
   wordpress:
 
-volumes:
-  my-mariadb-data:
+# volumes:
+#   my-mariadb-data:

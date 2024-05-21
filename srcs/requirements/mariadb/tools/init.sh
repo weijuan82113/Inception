@@ -2,6 +2,7 @@
 
 #mysqlユーザーがなければ作成する
 if ! getent passwd | grep mysql; then
+	echo "create the mysql"
 	groupadd mysql
 	useradd -r -g mysql -s /bin/false mysql
 fi
@@ -16,7 +17,6 @@ else
 	chown -R mysql:mysql /run/mysqld
 fi
 
-
 #Mariadb初期化されたか確認
 if [ -d /var/lib/mysql/mysql ]; then
 	echo "MySQL directory already present, skipping creation"
@@ -24,14 +24,20 @@ if [ -d /var/lib/mysql/mysql ]; then
 else
 	echo "MySQL data directory not found creating initial DBs"
 	chown -R mysql:mysql /var/lib/mysql
-	mysql_install_db --user=mysql --ldata=/var/lib/mysql > /dev/null
+	mysql_install_db --user=mysql > /dev/null
 
+#SQL scrpitのテンプレートファイルを作成する
 	tfile=`mktemp`
+
 	if [ ! -f "$tfile" ]; then
 		exit 1
 	fi
 
 	#必須の環境変数をチェック
+	if [ -z "$MYSQL_ROOT_USER" ]; then
+		echo "Error: Missing required environment variables (MYSQL_ROOT_USER)."
+		exit 1
+	fi
 	if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
 		echo "Error: Missing required environment variables (MYSQL_ROOT_PASSWORD)."
 		exit 1
@@ -47,6 +53,7 @@ SET PASSWORD FOR '$MYSQL_ROOT_USER'@'localhost'=PASSWORD('$MYSQL_ROOT_PASSWORD')
 DROP DATABASE IF EXISTS test;
 FLUSH PRIVILEGES;
 EOF
+#最後にprivalegeが必要？
 
 	# databaseを作る
 	if [ -z "$MYSQL_DATABASE" ]; then
@@ -54,13 +61,13 @@ EOF
 		exit 1
 	else
 		echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE" >> $tfile
-	fi
-	if [ ! -z "$MYSQL_CHARSET" ] && [ ! -z "$MYSQL_COLLATION" ]; then
-		echo "[i] with character set [$MYSQL_CHARSET] and collation [$MYSQL_COLLATION]"
-		echo "CHARACTER SET $MYSQL_CHARSET COLLATE $MYSQL_COLLATION;" >> $tfile
-	else
-		echo "[i] with character set: 'utf8mb4' and collation: 'utf8mb4_unicode_ci'"
-		echo "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" >> $tfile
+		if [ ! -z "$MYSQL_CHARSET" ] && [ ! -z "$MYSQL_COLLATION" ]; then
+			echo "[info] with character set [$MYSQL_CHARSET] and collation [$MYSQL_COLLATION]"
+			echo "CHARACTER SET $MYSQL_CHARSET COLLATE $MYSQL_COLLATION;" >> $tfile
+		else
+			echo "[info] with character set: 'utf8mb4' and collation: 'utf8mb4_unicode_ci'"
+			echo "CHARACTER SET utf8 COLLATE utf8_general_ci;" >> $tfile
+		fi
 	fi
 
 	# userを作る
@@ -68,12 +75,11 @@ EOF
 		echo "Error: Missing required environment variables (MYSQL_USER, MYSQL_PASSWORD)."
 		exit 1
 	else
-		echo "[i] Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
+		echo "[info] Creating user: $MYSQL_USER with password"
 		echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> $tfile
 		echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';" >> $tfile
-		echo "FLUSH PRIVILEGES;" >> $tfile
 	fi
-
+	echo "FLUSH PRIVILEGES;" >> $tfile
 
 	/usr/sbin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $tfile
 	rm -f $tfile

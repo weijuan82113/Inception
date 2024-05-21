@@ -10,8 +10,4 @@ COPY ./conf/ssl-params.conf /etc/nginx/snippets/
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
 RUN openssl dhparam -out /etc/nginx/dhparam.pem 4096
 ENTRYPOINT ["/usr/bin/tini", "--"]
-# ENTRYPOINT ["/docker-entrypoint-initdb.d/init.sh"]
 CMD ["nginx", "-g", "daemon off;"]
-# CMD ["chmod +x /docker-entrypoint-initdb.d/init.sh && ./docker-entrypoint-initdb.d/init.sh"]
-# ENTRYPOINT ["/usr/sbin/nginx", "nginx"]
-# ENTRYPOINT ["/bin/sh", "-c"]
