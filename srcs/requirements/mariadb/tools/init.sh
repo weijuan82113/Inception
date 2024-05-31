@@ -53,7 +53,6 @@ SET PASSWORD FOR '$MYSQL_ROOT_USER'@'localhost'=PASSWORD('$MYSQL_ROOT_PASSWORD')
 DROP DATABASE IF EXISTS test;
 FLUSH PRIVILEGES;
 EOF
-#最後にprivalegeが必要？
 
 	# databaseを作る
 	if [ -z "$MYSQL_DATABASE" ]; then

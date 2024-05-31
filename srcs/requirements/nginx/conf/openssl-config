@@ -14,7 +14,7 @@ RANDFILE               = $ENV::HOME/.rnd
  L                      = Shinakawa
  O                      = WeijuanChen
  OU                     = Wchen
- CN                     = Wchen
+ CN                     = wchen.42.fr
  emailAddress           = user@example.com
 
  [ req_attributes ]

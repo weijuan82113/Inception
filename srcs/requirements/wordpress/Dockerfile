@@ -13,7 +13,7 @@ RUN ser -eux; \
 COPY ./conf/www.conf etc/php/7.4/fpm/pool.d/
 COPY ./tools/init.sh docker-entrypoint-initdb.d/
 RUN chmod +x /docker-entrypoint-initdb.d/init.sh
-# HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=3 \
+# HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=10 \
 # 	CMD mariadb --host mariadb --user user --password 'password' --port 3306
 ENTRYPOINT ["./docker-entrypoint-initdb.d/init.sh"]
 CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize", "--fpm-config", "/etc/php/7.4/fpm/php-fpm.conf"]

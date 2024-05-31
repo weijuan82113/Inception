@@ -4,15 +4,13 @@ services:
   nginx:
     build: ./requirements/nginx
     ports:
-      - "8080:443"
+      - "443:443"
+      - "80:80"
     tty: true
     networks:
       - wordpress
     volumes:
       - ./requirements/tools/www:/var/www/html/
-    # depends_on:
-    #   wordpress:
-    #     condition: service_healthy
 
   wordpress:
     build: ./requirements/wordpress
