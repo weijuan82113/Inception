@@ -10,14 +10,16 @@ services:
     networks:
       - wordpress
     volumes:
-      - ./requirements/tools/www:/var/www/html/
+      # - ./requirements/tools/www:/var/www/html/
+      - nginx-volume:/var/www/html/
 
   wordpress:
     build: ./requirements/wordpress
     env_file:
       - .env
     volumes:
-      - ./requirements/tools/www:/var/www/html/
+      # - ./requirements/tools/www:/var/www/html/
+      - nginx-volume:/var/www/html/
     tty: true
     networks:
       - wordpress
@@ -28,10 +30,9 @@ services:
     build: ./requirements/mariadb
     env_file:
       - .env
-    # volumes:
-    #   - my-mariadb-data:/var/lib/mysql
     volumes:
-      - ./requirements/tools/db:/var/lib/mysql/
+    #   - ./requirements/tools/db:/var/lib/mysql/
+      - mariadb-volume:/var/lib/mysql/
     tty: true
     networks:
       - wordpress
@@ -41,5 +42,18 @@ services:
 networks:
   wordpress:
 
-# volumes:
-#   my-mariadb-data:
+volumes:
+  mariadb-volume:
+    driver_opts:
+      type: none
+      device: /home/wchen/data/db
+      # device: /Users/weijuan/projects/42Tokyo/Inception/Inception/srcs/requirements/tools/db
+      o: bind
+  nginx-volume:
+    driver_opts:
+      type: none
+      device: /home/wchen/data/www
+      # device: /Users/weijuan/projects/42Tokyo/Inception/Inception/srcs/requirements/tools/www
+      o: bind
+
+

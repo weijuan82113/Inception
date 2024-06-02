@@ -74,7 +74,7 @@ EOF
 		echo "Error: Missing required environment variables (MYSQL_USER, MYSQL_PASSWORD)."
 		exit 1
 	else
-		echo "[info] Creating user: $MYSQL_USER with password"
+		echo "[info] Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
 		echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> $tfile
 		echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';" >> $tfile
 	fi
