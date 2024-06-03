@@ -31,8 +31,8 @@ services:
     env_file:
       - .env
     volumes:
-    #   - ./requirements/tools/db:/var/lib/mysql/
-      - mariadb-volume:/var/lib/mysql/
+    # - ./requirements/tools/db:/var/lib/mysql/
+    - mariadb-volume:/var/lib/mysql/
     tty: true
     networks:
       - wordpress
@@ -47,13 +47,9 @@ volumes:
     driver_opts:
       type: none
       device: /home/wchen/data/db
-      # device: /Users/weijuan/projects/42Tokyo/Inception/Inception/srcs/requirements/tools/db
       o: bind
   nginx-volume:
     driver_opts:
       type: none
       device: /home/wchen/data/www
-      # device: /Users/weijuan/projects/42Tokyo/Inception/Inception/srcs/requirements/tools/www
       o: bind
-
-

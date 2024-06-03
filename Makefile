@@ -1,18 +1,22 @@
+DBDIR = /home/wchen/data/db
+WPDIR = /home/wchen/data/wp
+
 # デフォルトのターゲット
 # .DEFAULT_GOAL := help
-
 # # ヘルプを表示
 help:
 	@echo "Usage:"
 	@echo "make help"       # このヘルプメッセージを表示"
 	@echo "make build"      # コンテナイメージをビルド"
 	@echo "make up"         # コンテナを起動"
+	@echo "make run"		# コンテナをビルドして起動する"
 	@echo "make down"       # コンテナを停止"
 	@echo "make ps"         # 起動中のコンテナを表示"
 
 # 変数の定義
 IMAGE_NAME = Inception
 DOCKER_COMPOSE_FILE = ./srcs/docker-compose.yml
+
 
 # ビルド
 build:
@@ -23,6 +27,8 @@ up:
 
 # 実行
 run:
+	mkdir -p $(DBDIR)
+	mkdir -p $(WPDIR)
 	docker compose -f $(DOCKER_COMPOSE_FILE) up --build -d
 
 # コンテナの停止と削除
