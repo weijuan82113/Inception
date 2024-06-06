@@ -20,26 +20,26 @@ DOCKER_COMPOSE_FILE = ./srcs/docker-compose.yml
 
 # ビルド
 build:
-	docker compose -f $(DOCKER_COMPOSE_FILE) build
+	docker-compose -f $(DOCKER_COMPOSE_FILE) build
 
 up:
-	docker compose -f $(DOCKER_COMPOSE_FILE) up -d
+	docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
 
 # 実行
 run:
 	mkdir -p $(DBDIR)
 	mkdir -p $(WPDIR)
-	docker compose -f $(DOCKER_COMPOSE_FILE) up --build -d
+	docker-compose -f $(DOCKER_COMPOSE_FILE) up --build -d
 
 # コンテナの停止と削除
 down:
-	docker compose -f $(DOCKER_COMPOSE_FILE) down
+	docker-compose -f $(DOCKER_COMPOSE_FILE) down
 
 # 依存関係が変更された場合にコンテナを再構築
 rebuild:
-	docker compose -f $(DOCKER_COMPOSE_FILE) build
+	docker-compose -f $(DOCKER_COMPOSE_FILE) build
 
 ps:
-	docker compose -f $(DOCKER_COMPOSE_FILE) ps
+	docker-compose -f $(DOCKER_COMPOSE_FILE) ps
 
 .PHONY: help build up run down rebuild ps

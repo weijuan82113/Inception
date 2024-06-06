@@ -18,13 +18,14 @@ else
 fi
 
 #Mariadb初期化されたか確認
-if [ -d /var/lib/mysql/mysql ]; then
+if [ -d /var/lib/mysql/$MYSQL_DATABASE ]; then
 	echo "MySQL directory already present, skipping creation"
 	chown -R mysql:mysql /var/lib/mysql
 else
 	echo "MySQL data directory not found creating initial DBs"
+	rm -rf var/lib/mysql/mysql
 	chown -R mysql:mysql /var/lib/mysql
-	mysql_install_db --user=mysql > /dev/null
+	mysql_install_db --user=mysql > /dev/null || !mysql_install_db
 
 #SQL scrpitのテンプレートファイルを作成する
 	tfile=`mktemp`
