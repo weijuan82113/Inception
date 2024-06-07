@@ -10,46 +10,59 @@ services:
     networks:
       - wordpress
     volumes:
-      # - ./requirements/tools/www:/var/www/html/
-      - nginx-volume:/var/www/html/
+      - ./requirements/tools/www:/var/www/html/
+      # - nginx-volume:/var/www/html/
 
   wordpress:
     build: ./requirements/wordpress
     env_file:
       - .env
     volumes:
-      # - ./requirements/tools/www:/var/www/html/
-      - nginx-volume:/var/www/html/
+      - ./requirements/tools/www:/var/www/html/
+      # - nginx-volume:/var/www/html/
     tty: true
     networks:
       - wordpress
     expose:
       - 9000
+    # depends_on:
+    #   mariadb:
+    #     condition: service_healthy
 
   mariadb:
     build: ./requirements/mariadb
     env_file:
       - .env
     volumes:
-    # - ./requirements/tools/db:/var/lib/mysql/
-    - mariadb-volume:/var/lib/mysql/
+    - ./requirements/tools/db:/var/lib/mysql/
+    # - mariadb-volume:/var/lib/mysql/
     tty: true
     networks:
       - wordpress
     expose:
       - 3306
+    # healthcheck:
+    #   test: ["CMD", "mariadb", "-u", "root", "-p", "root_password"]
+    #   interval: 1m30s
+    #   timeout: 1m
+    #   retries: 5
+    #   start_period: 2m
 
 networks:
   wordpress:
 
-volumes:
-  mariadb-volume:
-    driver_opts:
-      type: none
-      device: /home/wchen/data/db
-      o: bind
-  nginx-volume:
-    driver_opts:
-      type: none
-      device: /home/wchen/data/wp
-      o: bind
+#修正した点：device path、serviceのvolume指定
+
+# volumes:
+#   mariadb-volume:
+#     driver_opts:
+#       type: none
+#       # device: ./requirements/tools/db
+#       device: /home/wchen/data/db
+#       o: bind
+#   nginx-volume:
+#     driver_opts:
+#       type: none
+#       # device: ./requirements/tools/www
+#       device: /home/wchen/data/wp
+#       o: bind

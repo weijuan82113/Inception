@@ -18,7 +18,7 @@ else
 fi
 
 #Mariadb初期化されたか確認
-if [ -d /var/lib/mysql/$MYSQL_DATABASE ]; then
+if [ -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 	echo "MySQL directory already present, skipping creation"
 	chown -R mysql:mysql /var/lib/mysql
 else
