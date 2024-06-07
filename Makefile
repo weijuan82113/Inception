@@ -1,8 +1,6 @@
-# DBDIR = /home/wchen/data/db
-# WPDIR = /home/wchen/data/wp
+DBDIR = /home/wchen/data/db
+WPDIR = /home/wchen/data/wp
 
-# DBDIR = ./requirements/tools/db
-# WPDIR = ./requirements/tools/www
 # デフォルトのターゲット
 # .DEFAULT_GOAL := help
 # # ヘルプを表示
@@ -28,9 +26,9 @@ up:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
 
 # 実行
-# mkdir -p $(DBDIR)
-# mkdir -p $(WPDIR)
 run:
+	mkdir -p $(DBDIR)
+	mkdir -p $(WPDIR)
 	docker-compose -f $(DOCKER_COMPOSE_FILE) up --build -d
 
 # コンテナの停止と削除
