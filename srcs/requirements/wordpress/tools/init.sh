@@ -22,7 +22,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         $WORD_PRESS_PATH/wp-config-sample.php > $WORD_PRESS_PATH/wp-config.php
 
     # 生成されたファイルに適切なパーミッションを設定 (必要に応じて)
-    chmod 640 $WORD_PRESS_PATH/wp-config.php
+    chmod 777 $WORD_PRESS_PATH/wp-config.php
 
     # 必須の環境変数をチェック
     if [ -z "$DOMIAN_NAME" ] || [ -z "$WORD_PRESS_ADMIN_USER" ] || [ -z "$WORD_PRESS_ADMIN_EMAIL" ] || [ -z "$WORD_PRESS_ADMIN_PASSWORD" ] || [ -z "$WORD_PRESS_TITLE" ]; then

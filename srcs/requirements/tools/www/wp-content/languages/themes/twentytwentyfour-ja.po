@@ -1,0 +1,356 @@
+# Translation of Themes - Twenty Twenty-Four in Japanese
+# This file is distributed under the same license as the Themes - Twenty Twenty-Four package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2024-04-18 12:08:03+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Themes - Twenty Twenty-Four\n"
+
+#. Description of the theme
+#: style.css
+#, gp-priority: high
+msgid "Twenty Twenty-Four is designed to be flexible, versatile and applicable to any website. Its collection of templates and patterns tailor to different needs, such as presenting a business, blogging and writing or showcasing work. A multitude of possibilities open up with just a few adjustments to color and typography. Twenty Twenty-Four comes with style variations and full page designs to help speed up the site building process, is fully compatible with the site editor, and takes advantage of new design tools introduced in WordPress 6.4."
+msgstr "Twenty Twenty-Four は、柔軟で用途が広く、あらゆるウェブサイトに適用できるように設計されています。テンプレートとパターンのコレクションは、ビジネス紹介、ブログ、執筆、作品の紹介など、さまざまなニーズに合わせて調整されています。色とタイポグラフィを少し調整するだけで、多くの可能性が広がります。Twenty Twenty-Fourは、サイトの構築プロセスを加速するためのスタイルバリエーションとフルページデザインを備え、サイトエディターと完全に互換性があり、WordPress 6.4で導入された新しいデザインツールを活用しています。"
+
+#. Theme Name of the theme
+#: style.css
+#, gp-priority: high
+msgid "Twenty Twenty-Four"
+msgstr "Twenty Twenty-Four"
+
+#: patterns/footer.php:95
+msgid "Twitter/X"
+msgstr "Twitter/X"
+
+#: patterns/footer.php:72
+msgid "Terms and Conditions"
+msgstr "利用規約"
+
+#: patterns/footer.php:71
+msgid "Privacy Policy"
+msgstr "プライバシーポリシー"
+
+#: patterns/footer.php:73
+msgid "Contact Us"
+msgstr "お問い合わせ"
+
+#: patterns/footer.php:50
+msgid "Careers"
+msgstr "採用情報"
+
+#: patterns/footer.php:49
+msgid "History"
+msgstr "沿革"
+
+#: patterns/footer.php:48
+msgid "Team"
+msgstr "メンバー"
+
+#: patterns/posts-list.php
+msgctxt "Pattern title"
+msgid "List of posts without images, 1 column"
+msgstr "画像のないポスト一覧、1カラム"
+
+#: patterns/hidden-portfolio-hero.php:16
+msgid "I’m <em>Leia Acosta</em>, a passionate photographer who finds inspiration in capturing the fleeting beauty of life."
+msgstr "私は<em>Leia Acosta</em>です。移りゆく生命の美しさを捉える情熱的な写真家です。"
+
+#: functions.php:200
+msgid "A collection of full page layouts."
+msgstr "フルページレイアウトのコレクション"
+
+#: functions.php:199
+msgctxt "Block pattern category"
+msgid "Pages"
+msgstr "固定ページ"
+
+#. Author URI of the theme
+#. Translators: WordPress link.
+#: style.css patterns/footer-centered-logo-nav.php:21
+#: patterns/footer-colophon-3-col.php:90 patterns/footer.php:116
+msgid "https://wordpress.org"
+msgstr "https://ja.wordpress.org"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr "ヘッダー"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr "フッター"
+
+#: styles/fossil.json styles/ice.json theme.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr "インター"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Post Meta"
+msgstr "投稿メタ"
+
+#: styles/fossil.json styles/ice.json styles/maelstrom.json theme.json
+msgctxt "Font size name"
+msgid "Extra Large"
+msgstr "特大"
+
+#: styles/fossil.json styles/ice.json styles/maelstrom.json theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr "大"
+
+#: styles/fossil.json styles/ice.json styles/maelstrom.json theme.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr "中"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "6"
+msgstr "6"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "5"
+msgstr "5"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "4"
+msgstr "4"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "3"
+msgstr "3"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2"
+msgstr "2"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "1"
+msgstr "1"
+
+#: styles/ember.json styles/fossil.json styles/ice.json styles/maelstrom.json
+#: styles/mint.json styles/onyx.json styles/rust.json theme.json
+msgctxt "Color name"
+msgid "Contrast"
+msgstr "コントラスト"
+
+#: styles/ember.json styles/fossil.json styles/ice.json styles/maelstrom.json
+#: styles/mint.json styles/onyx.json styles/rust.json theme.json
+msgctxt "Color name"
+msgid "Base"
+msgstr "ベース"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Single with Sidebar"
+msgstr "サイドバー付きの投稿"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page with Sidebar"
+msgstr "サイドバー付きの固定ページ"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page No Title"
+msgstr "タイトルのない固定ページ"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Sidebar"
+msgstr "サイドバー"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical hard pewter to white"
+msgstr "濃いグレーからホワイトへの垂直方向に明確なグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical hard mint to white"
+msgstr "ミントグリーンからホワイトへの垂直方向に明確なグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical hard sage to white"
+msgstr "セージグリーンからホワイトへの垂直方向に明確なグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical hard rust to white"
+msgstr "錆色からホワイトへの垂直方向に明確なグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical hard sandstone to white"
+msgstr "サンドストーン色からホワイトへの垂直方向に明確なグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical hard beige to white"
+msgstr "ベージュからホワイトへの垂直方向に明確なグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical soft pewter to white"
+msgstr "ライトグレーからホワイトへの垂直方向になめらかなグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical soft mint to white"
+msgstr "ミントグリーンからホワイトへの垂直方向になめらかなグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical soft sage to white"
+msgstr "セージグリーンからホワイトへの垂直方向になめらかなグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical soft rust to white"
+msgstr "錆色からホワイトへの垂直方向になめらかなグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical soft sandstone to white"
+msgstr "サンドストーン色からホワイトへの垂直方向になめらかなグラデーション"
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Vertical soft beige to white"
+msgstr "ベージュからホワイトへの垂直方向になめらかなグラデーション"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and pastel blue"
+msgstr "ブラックとパステルブルー"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and sage"
+msgstr "ブラックとセージグリーン"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and rust"
+msgstr "ブラックと錆色"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and sandstone"
+msgstr "ブラックとサンドストーン色"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and white"
+msgstr "ブラックとホワイト"
+
+#: styles/rust.json
+msgctxt "Color name"
+msgid "Base / 2"
+msgstr "ベース / 2"
+
+#: styles/rust.json
+msgctxt "Gradient name"
+msgid "Vertical hard rust to beige"
+msgstr "錆色からベージュへの垂直方向に明確なグラデーション"
+
+#: styles/rust.json
+msgctxt "Gradient name"
+msgid "Vertical rust to beige"
+msgstr "錆色からベージュへの垂直方向のグラデーション"
+
+#: styles/rust.json
+msgctxt "Gradient name"
+msgid "Vertical hard transparent rust to beige"
+msgstr "透明感のある錆色からベージュへの垂直方向に明確なグラデーション"
+
+#: styles/rust.json
+msgctxt "Gradient name"
+msgid "Vertical transparent rust to beige"
+msgstr "透明感のある錆色からベージュへの垂直方向のグラデーション"
+
+#: styles/rust.json
+msgctxt "Duotone name"
+msgid "Dark rust to beige"
+msgstr "暗い錆色からベージュ"
+
+#: styles/rust.json
+msgctxt "Style variation name"
+msgid "Rust"
+msgstr "錆"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Five"
+msgstr "アクセント / 5"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Four"
+msgstr "アクセント / 4"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Three"
+msgstr "アクセント / 3"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Two"
+msgstr "アクセント / 2"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr "アクセント"
+
+#: styles/onyx.json
+msgctxt "Gradient name"
+msgid "Vertical hard pewter to dark gray"
+msgstr "ピューターグレーからダークグレーへの垂直方向に明確なグラデーション"
+
+#: styles/onyx.json
+msgctxt "Gradient name"
+msgid "Vertical hard steel to dark gray"
+msgstr "スチールグレーからダークグレーへの垂直方向に明確なグラデーション"
+
+#: styles/onyx.json
+msgctxt "Gradient name"
+msgid "Vertical hard olive to dark gray"
+msgstr "オリーブグリーンからダークグレーへの垂直方向に明確なグラデーション"
+
+#: styles/onyx.json
+msgctxt "Gradient name"
+msgid "Vertical hard cinnamon to dark gray"
+msgstr "シナモン色からダークグレーへの垂直方向に明確なグラデーション"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page with Wide Image"
+msgstr "広幅画像付き固定ページ"
+
+#. Author of the theme
+#: style.css
+#, gp-priority: low
+msgid "the WordPress team"
+msgstr "WordPress チーム"
+
+#. Theme URI of the theme
+#: style.css
+#, gp-priority: low
+msgid "https://wordpress.org/themes/twentytwentyfour/"
+msgstr "https://wordpress.org/themes/twentytwentyfour/"
