@@ -2,6 +2,7 @@ version: "3"
 
 services:
   nginx:
+    image: nginx
     build: ./requirements/nginx
     ports:
       - "443:443"
@@ -14,6 +15,7 @@ services:
       - nginx-volume:/var/www/html/
 
   wordpress:
+    image: wordpress
     build: ./requirements/wordpress
     env_file:
       - .env
@@ -30,6 +32,7 @@ services:
     #     condition: service_healthy
 
   mariadb:
+    image: mariadb
     build: ./requirements/mariadb
     env_file:
       - .env
